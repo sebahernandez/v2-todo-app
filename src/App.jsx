@@ -49,6 +49,20 @@ const App = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const computedItemsLeft = todos.filter((todo) => !todo.completed).length;
+
+  const clearCompleted = () => {
+    setTodos(todos.filter((todo) => !todo.completed));
+  };
+
+  const [filter, setFilter] = useState("all");
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "all") return true;
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+  });
+
   return (
     <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat">
       <Header />
@@ -57,16 +71,19 @@ const App = () => {
         <TodoCreate createTodo={createTodo} />
         {/* todolist (todoitem) todoupdate & tododelete */}
         <TodoList
-          todos={todos}
+          todos={filteredTodos}
           deleteTodo={deleteTodo}
           updateTodo={updateTodo}
         />
 
         {/* TodoComputed */}
-        <TodoComputed />
+        <TodoComputed
+          computedItemsLeft={computedItemsLeft}
+          clearCompleted={clearCompleted}
+        />
 
         {/* todoFilter */}
-        <TodoFilter />
+        <TodoFilter changeFilter={setFilter} filter={filter} />
       </main>
 
       <section className="mt-8 text-center">
