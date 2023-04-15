@@ -70,10 +70,13 @@ const App = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]">
+    <div
+      className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]
+    md:bg-[url('./assets/images/bg-desktop-dark.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]"
+    >
       <Header />
 
-      <main className="container mx-auto mt-8  px-4">
+      <main className="container mx-auto mt-8 px-4 md:max-w-xl">
         <TodoCreate createTodo={createTodo} />
         {/* todolist (todoitem) todoupdate & tododelete */}
         <TodoList
