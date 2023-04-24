@@ -4,25 +4,7 @@ import TodoCreate from "./components/TodoCreate";
 import TodoList from "./components/TodoList";
 import TodoComputed from "./components/TodoComputed";
 import TodoFilter from "./components/TodoFilter";
-
-/* const initialStateTodos = [
-  {
-    id: 1,
-    title: "Go to the gym",
-    completed: true,
-  },
-  {
-    id: 2,
-    title: "Complete online js bluuweb course",
-    completed: false,
-  },
-
-  {
-    id: 3,
-    title: "10 minute meditation",
-    completed: false,
-  },
-]; */
+import { DragDropContext } from "@hello-pangea/dnd";
 
 const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
@@ -79,11 +61,13 @@ const App = () => {
       <main className="container mx-auto mt-8 px-4 md:max-w-xl">
         <TodoCreate createTodo={createTodo} />
         {/* todolist (todoitem) todoupdate & tododelete */}
-        <TodoList
-          todos={filteredTodos}
-          deleteTodo={deleteTodo}
-          updateTodo={updateTodo}
-        />
+        <DragDropContext>
+          <TodoList
+            todos={filteredTodos}
+            deleteTodo={deleteTodo}
+            updateTodo={updateTodo}
+          />
+        </DragDropContext>
 
         {/* TodoComputed */}
         <TodoComputed
