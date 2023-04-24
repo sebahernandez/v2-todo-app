@@ -18,7 +18,7 @@ const TodoList = ({ todos, deleteTodo, updateTodo }) => {
                   todo={todo}
                   deleteTodo={deleteTodo}
                   updateTodo={updateTodo}
-                  ref={...draggableProvided.innerRef}
+                  ref={draggableProvided.innerRef}
                   {...draggableProvided.dragHandleProps}
                   {...draggableProvided.draggableProps}
                 />

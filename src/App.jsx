@@ -51,6 +51,15 @@ const App = () => {
     if (filter === "completed") return todo.completed;
   });
 
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const items = Array.from(todos);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setTodos(items);
+  };
   return (
     <div
       className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]
@@ -61,7 +70,7 @@ const App = () => {
       <main className="container mx-auto mt-8 px-4 md:max-w-xl">
         <TodoCreate createTodo={createTodo} />
         {/* todolist (todoitem) todoupdate & tododelete */}
-        <DragDropContext>
+        <DragDropContext onDragEnd={handleDragEnd}>
           <TodoList
             todos={filteredTodos}
             deleteTodo={deleteTodo}
@@ -80,7 +89,7 @@ const App = () => {
       </main>
 
       <section className="mt-8 text-center dark:text-gray-400">
-        Drag and drop to reorder list
+        Mueve los elementos para ordenarlos
       </section>
     </div>
   );
